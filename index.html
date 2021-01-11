@@ -12,19 +12,44 @@
         /*    margin: 0px;*/
         /*    padding: 0px;*/
         /*    }*/
+        
+        #win {
+            border: 2px solid;
+        }
     </style>
     
 </head>
 <body>
+    
     <button id="11" onclick="myFunction(this.id)" class="pp">_</button> <button id="12" onclick="myFunction(this.id)" class="pp">_</button> <button id="13" onclick="myFunction(this.id)" class="pp">_</button> <br>
     <button id="21" onclick="myFunction(this.id)" class="pp">_</button> <button id="22" onclick="myFunction(this.id)" class="pp">_</button> <button id="23" onclick="myFunction(this.id)" class="pp">_</button> <br>
     <button id="31" onclick="myFunction(this.id)" class="pp">_</button> <button id="32" onclick="myFunction(this.id)" class="pp">_</button> <button id="33" onclick="myFunction(this.id)" class="pp">_</button> <br>
     
+    <h1 id="win">  </h1>
+    
     <script>
+    function gameCheck() {
+        for (x = 1; x < 4; x++) {
+            var rowid = "";
+            for (y = 1; y < 4; y++) {
+                var z = ""; z+= x; z+= y;
+                rowid += document.getElementById(z).innerHTML;
+            }
+            if (rowid == "XXX" || rowid == "OOO"){
+                    return true;
+                } 
+        }
+        return false;
+    }
+    
     function myFunction(idd){
         document.getElementById(idd).innerHTML = "X";
+        if (gameCheck() == true) {
+         document.getElementById("win").innerHTML = "You won!";
+        }
     }
     </script>
     
 </body>
 </html>
+
