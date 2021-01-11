@@ -7,6 +7,16 @@
             font-size: 75px;
         }
         
+        .again {
+            height: 50px;
+            width: max-content;
+            border: 2px solid;
+            position: relative;
+            margin: auto;
+            margin-left: 145px;
+            /*display: block;*/
+        }
+        
         /*row {*/
         /*    display: block;*/
         /*    margin: 0px;*/
@@ -15,6 +25,11 @@
         
         #win {
             border: 2px solid;
+            width: 350px;
+            margin-left: 8px;
+            text-align: center;
+            /*display: block;*/
+            position: absolute;
         }
     </style>
     
@@ -26,6 +41,8 @@
     <button id="31" onclick="myFunction(this.id)" class="pp">_</button> <button id="32" onclick="myFunction(this.id)" class="pp">_</button> <button id="33" onclick="myFunction(this.id)" class="pp">_</button> <br>
     
     <h1 id="win">  </h1>
+    <br> <br><br><br>
+    <button id="again" onclick="restart()" class="again">Play again</button>
     
     <script>
     function gameCheck() {
@@ -42,14 +59,28 @@
         return false;
     }
     
+    function restart() {
+        for (x = 1; x < 4; x++){
+            for (y = 1; y < 4; y++) {
+                var z = ""; z+= x; z+= y;
+                document.getElementById(z).innerHTML = "_";
+            }
+        }
+        document.getElementById("win").innerHTML = "";
+    }
+    
     function myFunction(idd){
+        if (document.getElementById(idd).innerHTML == "_"){
         document.getElementById(idd).innerHTML = "X";
+        }
         if (gameCheck() == true) {
          document.getElementById("win").innerHTML = "You won!";
         }
     }
+
     </script>
     
 </body>
 </html>
+
 
