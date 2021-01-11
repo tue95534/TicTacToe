@@ -1,0 +1,30 @@
+<html>
+<head>
+    <style>
+        .pp {
+            display: inline-flex; height: 100px; width: 100px; border: 2px solid; background-color: gray; vertical-align: middle;
+            top:0px; text-align: center; justify-content: center; justify-items: center; align-items: center; margin: 10px;
+            font-size: 75px;
+        }
+        
+        /*row {*/
+        /*    display: block;*/
+        /*    margin: 0px;*/
+        /*    padding: 0px;*/
+        /*    }*/
+    </style>
+    
+</head>
+<body>
+    <button id="11" onclick="myFunction(this.id)" class="pp">_</button> <button id="12" onclick="myFunction(this.id)" class="pp">_</button> <button id="13" onclick="myFunction(this.id)" class="pp">_</button> <br>
+    <button id="21" onclick="myFunction(this.id)" class="pp">_</button> <button id="22" onclick="myFunction(this.id)" class="pp">_</button> <button id="23" onclick="myFunction(this.id)" class="pp">_</button> <br>
+    <button id="31" onclick="myFunction(this.id)" class="pp">_</button> <button id="32" onclick="myFunction(this.id)" class="pp">_</button> <button id="33" onclick="myFunction(this.id)" class="pp">_</button> <br>
+    
+    <script>
+    function myFunction(idd){
+        document.getElementById(idd).innerHTML = "X";
+    }
+    </script>
+    
+</body>
+</html>
