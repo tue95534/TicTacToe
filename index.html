@@ -1,10 +1,11 @@
 <html>
 <head>
+    <title>Tic-Tac-Toe</title>
     <style>
         .pp {
             display: inline-flex; height: 100px; width: 100px; border: 2px solid; background-color: gray; vertical-align: middle;
             top:0px; text-align: center; justify-content: center; justify-items: center; align-items: center; margin: 10px;
-            font-size: 75px;
+            font-size: 75px; box-shadow: 10px 5px 5px red; font-family: "Comic Sans MS", "Comic Sans", cursive;
         }
         
         .again {
@@ -14,35 +15,53 @@
             position: relative;
             margin: auto;
             margin-left: 145px;
+            background-image: linear-gradient(red, yellow);
             /*display: block;*/
         }
         
-        /*row {*/
-        /*    display: block;*/
-        /*    margin: 0px;*/
-        /*    padding: 0px;*/
-        /*    }*/
+        .board {
+            max-width: max-content; margin-left: auto; margin-right: auto;
+        }
+        
+        body {
+            background-image: linear-gradient(blue, white);
+        }
         
         #win {
             border: 2px solid;
             width: 350px;
             margin-left: 8px;
             text-align: center;
-            /*display: block;*/
             position: absolute;
+            font-family: "Comic Sans MS", "Comic Sans", cursive;
+        }
+        
+        header {
+            font-size: 50px;
+            max-width: max-content;
+            margin-left: auto; margin-right: auto;
+            font-family: "Comic Sans MS", "Comic Sans", cursive;
         }
     </style>
     
 </head>
+
+
 <body>
+    <header>
+        <h1>Tic-Tac-Toe!</h1>
+    </header>
     
-    <button id="11" onclick="myFunction(this.id)" class="pp">_</button> <button id="12" onclick="myFunction(this.id)" class="pp">_</button> <button id="13" onclick="myFunction(this.id)" class="pp">_</button> <br>
-    <button id="21" onclick="myFunction(this.id)" class="pp">_</button> <button id="22" onclick="myFunction(this.id)" class="pp">_</button> <button id="23" onclick="myFunction(this.id)" class="pp">_</button> <br>
-    <button id="31" onclick="myFunction(this.id)" class="pp">_</button> <button id="32" onclick="myFunction(this.id)" class="pp">_</button> <button id="33" onclick="myFunction(this.id)" class="pp">_</button> <br>
+    <div class="board">
+        <button id="11" onclick="myFunction(this.id)" class="pp">_</button> <button id="12" onclick="myFunction(this.id)" class="pp">_</button> <button id="13" onclick="myFunction(this.id)" class="pp">_</button> <br>
+        <button id="21" onclick="myFunction(this.id)" class="pp">_</button> <button id="22" onclick="myFunction(this.id)" class="pp">_</button> <button id="23" onclick="myFunction(this.id)" class="pp">_</button> <br>
+        <button id="31" onclick="myFunction(this.id)" class="pp">_</button> <button id="32" onclick="myFunction(this.id)" class="pp">_</button> <button id="33" onclick="myFunction(this.id)" class="pp">_</button> <br>
+        
+        <h1 id="win">  </h1>
+        <br> <br><br><br>
+        <button id="again" onclick="restart()" class="again">Play again</button>
+    </div>
     
-    <h1 id="win">  </h1>
-    <br> <br><br><br>
-    <button id="again" onclick="restart()" class="again">Play again</button>
     
     <script>
     function gameCheck() {
@@ -56,7 +75,30 @@
                     return true;
                 } 
         }
+        
+        for (y = 1; y < 4; y++) {
+            var rowid = "";
+            for (x = 1; x < 4; x++) {
+                var z = ""; z+= x; z+= y;
+                rowid += document.getElementById(z).innerHTML;
+            }
+            if (rowid == "XXX" || rowid == "OOO"){
+                    return true;
+                } 
+        }
         return false;
+    }
+    
+    function tie() {
+        var boardid = "";
+        for (x = 1; x < 4; x++) {
+            for (y = 1; y < 4; y++) {
+                var z = ""; z+= x; z+= y;
+                boardid += document.getElementById(z).innerHTML;
+            }
+        }
+        if (boardid.includes("_")) {false;}
+        else {return true;}
     }
     
     function restart() {
@@ -77,31 +119,37 @@
     function myFunction(idd) {
         if (document.getElementById(idd).innerHTML == "_"){
             document.getElementById(idd).innerHTML = "X";
-        }
-        if (gameCheck() == true) {
-            document.getElementById("win").innerHTML = "You won!";
-            var btnArray = document.getElementsByClassName("pp");
-                for (x = 0; btnArray.length; x++) {
-                    btnArray[x].setAttribute( "onClick", "javascript: end();" );
-                }
-        }
-        else {
+            if (gameCheck() == true) {
+                document.getElementById("win").innerHTML = "You won!";
+                var btnArray = document.getElementsByClassName("pp");
+                    for (x = 0; btnArray.length; x++) {
+                        btnArray[x].setAttribute( "onClick", "javascript: end();" );
+                    }
+            }
+            else if (tie() == true) {
+                document.getElementById("win").innerHTML = "You tied!";
+                var btnArray = document.getElementsByClassName("pp");
+                    for (x = 0; btnArray.length; x++) {
+                        btnArray[x].setAttribute( "onClick", "javascript: end();" );
+                    }
+            }
+            
             if (computerWinH()) {
-                document.getElementById("win").innerHTML = "You lost1!";
+                document.getElementById("win").innerHTML = "You lost!";
                 var btnArray = document.getElementsByClassName("pp");
                 for (x = 0; btnArray.length; x++) {
                     btnArray[x].setAttribute( "onClick", "javascript: end();" );
                 }
             }
             else if (computerWinV()) {
-                document.getElementById("win").innerHTML = "You lost2!";
+                document.getElementById("win").innerHTML = "You lost!";
                 var btnArray = document.getElementsByClassName("pp");
                 for (x = 0; btnArray.length; x++) {
                     btnArray[x].setAttribute( "onClick", "javascript: end();" );
                 }
             }
             else if (computerWinD()) {
-                document.getElementById("win").innerHTML = "You lost3!";
+                document.getElementById("win").innerHTML = "You lost!";
                 var btnArray = document.getElementsByClassName("pp");
                 for (x = 0; btnArray.length; x++) {
                     btnArray[x].setAttribute( "onClick", "javascript: end();" );
@@ -225,10 +273,8 @@
             return false;
         }
     }
-
-
     </script>
-    
 </body>
 </html>
+
 
