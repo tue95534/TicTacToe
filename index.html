@@ -67,20 +67,168 @@
             }
         }
         document.getElementById("win").innerHTML = "";
+        var btnArray = document.getElementsByClassName("pp");
+        for (x = 0; btnArray.length; x++) {
+            var elidd = btnArray[x].getAttribute('id');
+            btnArray[x].setAttribute( "onClick", "javascript: myFunction(this.id);" );
+        }
     }
     
-    function myFunction(idd){
+    function myFunction(idd) {
         if (document.getElementById(idd).innerHTML == "_"){
-        document.getElementById(idd).innerHTML = "X";
+            document.getElementById(idd).innerHTML = "X";
         }
         if (gameCheck() == true) {
-         document.getElementById("win").innerHTML = "You won!";
+            document.getElementById("win").innerHTML = "You won!";
+            var btnArray = document.getElementsByClassName("pp");
+                for (x = 0; btnArray.length; x++) {
+                    btnArray[x].setAttribute( "onClick", "javascript: end();" );
+                }
+        }
+        else {
+            if (computerWinH()) {
+                document.getElementById("win").innerHTML = "You lost1!";
+                var btnArray = document.getElementsByClassName("pp");
+                for (x = 0; btnArray.length; x++) {
+                    btnArray[x].setAttribute( "onClick", "javascript: end();" );
+                }
+            }
+            else if (computerWinV()) {
+                document.getElementById("win").innerHTML = "You lost2!";
+                var btnArray = document.getElementsByClassName("pp");
+                for (x = 0; btnArray.length; x++) {
+                    btnArray[x].setAttribute( "onClick", "javascript: end();" );
+                }
+            }
+            else if (computerWinD()) {
+                document.getElementById("win").innerHTML = "You lost3!";
+                var btnArray = document.getElementsByClassName("pp");
+                for (x = 0; btnArray.length; x++) {
+                    btnArray[x].setAttribute( "onClick", "javascript: end();" );
+                }
+            }
+            else {
+                outerloop:
+                for (x = 1; x < 4; x++){
+                    for (y = 1; y < 4; y++) {
+                        var z = ""; z+= x; z+= y;
+                        if (document.getElementById(z).innerHTML == "_") {
+                            document.getElementById(z).innerHTML = "O";
+                            break outerloop;
+                        }
+                    }
+                }
+            }
         }
     }
+    
+    function end() {
+        var h = true;
+    }
+    
+    function computerWinH() {
+        for (x = 1; x < 4; x++) {
+            var rowid = "";
+            for (y = 1; y < 4; y++) {
+                var z = ""; z+= x; z+= y;
+                rowid += document.getElementById(z).innerHTML;
+            }
+            if (rowid == "OO_"){
+                var z = ""; z+= x; z+= 3;
+                document.getElementById(z).innerHTML = "O";   
+                return true;
+                } 
+            else if (rowid == "O_O"){
+                var z = ""; z+= x; z+= 2;
+                document.getElementById(z).innerHTML = "O";   
+                return true;
+                }
+            else if (rowid == "_OO"){
+                var z = ""; z+= x; z+= 1;
+                document.getElementById(z).innerHTML = "O";   
+                return true;
+                }
+        }
+        return false;
+    }
+    
+    function computerWinV() {
+        for (y = 1; y < 4; y++) {
+            var rowid = "";
+            for (x = 1; x < 4; x++) {
+                var z = ""; z+= x; z+= y;
+                rowid += document.getElementById(z).innerHTML;
+            }
+            if (rowid == "OO_"){
+                var z = ""; z+= 3; z+= y;
+                document.getElementById(z).innerHTML = "O";   
+                return true;
+                } 
+            else if (rowid == "O_O"){
+                var z = ""; z+= 2; z+= y;
+                document.getElementById(z).innerHTML = "O";   
+                return true;
+                }
+            else if (rowid == "_OO"){
+                var z = ""; z+= 1; z+= y;
+                document.getElementById(z).innerHTML = "O";   
+                return true;
+                } 
+        }
+        return false;
+    }
+    
+    function computerWinD() {
+        var rowid = "";
+        for (x=1; x<4; x++) {
+            var z = ""; z+=x; z+=x;
+            rowid += document.getElementById(z).innerHTML;  
+        }
+        if (rowid == "OO_"){
+            var z = ""; z+= x; z+= 3;
+            document.getElementById(z).innerHTML = "O";   
+            return true;
+            } 
+        else if (rowid == "O_O"){
+            var z = ""; z+= x; z+= 2;
+            document.getElementById(z).innerHTML = "O";   
+            return true;
+            }
+        else if (rowid == "_OO"){
+            var z = ""; z+= x; z+= 1;
+            document.getElementById(z).innerHTML = "O";   
+            return true;
+            } 
+        
+        rowid = "";
+        for (x=1; x<4; x++) { 
+            var z = ""; z+= x; z+=(4-x);
+            rowid += document.getElementById(z).innerHTML; 
+        }
+        
+        if (rowid == "OO_"){
+            var z = ""; z+= 3; z+= 1;
+            document.getElementById(z).innerHTML = "O";   
+            return true;
+            } 
+        else if (rowid == "O_O"){
+            var z = ""; z+= 2; z+= 2;
+            document.getElementById(z).innerHTML = "O";   
+            return true;
+            }
+        else if (rowid == "_OO"){
+            var z = ""; z+= 1; z+= 3;
+            document.getElementById(z).innerHTML = "O";   
+            return true;
+            }
+        else {
+            return false;
+        }
+    }
+
 
     </script>
     
 </body>
 </html>
-
 
