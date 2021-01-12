@@ -26,10 +26,11 @@
         
         body {
             background-image: linear-gradient(blue, white);
+            background-repeat: no-repeat;
         }
         
         #win {
-/*             border: 2px solid; */
+            
             width: 350px;
             margin-left: 8px;
             text-align: center;
@@ -38,7 +39,8 @@
         }
         
         header {
-            font-size: 50px;
+            display: flex;
+            justify-content: center; text-align: canter;
             max-width: max-content;
             margin-left: auto; margin-right: auto;
             font-family: "Comic Sans MS", "Comic Sans", cursive;
@@ -87,6 +89,25 @@
                     return true;
                 } 
         }
+        
+        rowid = "";
+        for (x = 1; x < 4; x++) {
+            var z = ""; z+= x; z+= 4-x;
+            rowid += document.getElementById(z).innerHTML;
+        }
+        if (rowid == "XXX" || rowid == "OOO"){
+                return true;
+        } 
+        
+        rowid = "";
+        for (x = 1; x < 4; x++) {
+            var z = ""; z+= x; z+= x;
+            rowid += document.getElementById(z).innerHTML;
+        }
+        if (rowid == "XXX" || rowid == "OOO"){
+                return true;
+        }
+            
         return false;
     }
     
@@ -234,17 +255,17 @@
             rowid += document.getElementById(z).innerHTML;  
         }
         if (rowid == "OO_"){
-            var z = ""; z+= x; z+= 3;
+            var z = "33";
             document.getElementById(z).innerHTML = "O";   
             return true;
             } 
         else if (rowid == "O_O"){
-            var z = ""; z+= x; z+= 2;
+            var z = "22"; 
             document.getElementById(z).innerHTML = "O";   
             return true;
             }
         else if (rowid == "_OO"){
-            var z = ""; z+= x; z+= 1;
+            var z = "11";
             document.getElementById(z).innerHTML = "O";   
             return true;
             } 
@@ -256,17 +277,17 @@
         }
         
         if (rowid == "OO_"){
-            var z = ""; z+= 3; z+= 1;
+            var z = "31";
             document.getElementById(z).innerHTML = "O";   
             return true;
             } 
         else if (rowid == "O_O"){
-            var z = ""; z+= 2; z+= 2;
+            var z = "22";
             document.getElementById(z).innerHTML = "O";   
             return true;
             }
         else if (rowid == "_OO"){
-            var z = ""; z+= 1; z+= 3;
+            var z = "13";
             document.getElementById(z).innerHTML = "O";   
             return true;
             }
@@ -277,5 +298,6 @@
     </script>
 </body>
 </html>
+
 
 
