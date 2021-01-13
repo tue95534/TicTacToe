@@ -25,7 +25,7 @@
         }
         
         body {
-            background-image: linear-gradient(blue, white);
+            background-image: linear-gradient(darkblue, white);
             background-repeat: no-repeat;
         }
         
@@ -142,55 +142,75 @@
         if (document.getElementById(idd).innerHTML == "_"){
             document.getElementById(idd).innerHTML = "X";
             if (gameCheck() == true) {
-                document.getElementById("win").innerHTML = "You won!";
-                var btnArray = document.getElementsByClassName("pp");
-                    for (x = 0; btnArray.length; x++) {
-                        btnArray[x].setAttribute( "onClick", "javascript: end();" );
-                    }
+                winEnd();
             }
             else if (tie() == true) {
-                document.getElementById("win").innerHTML = "You tied!";
-                var btnArray = document.getElementsByClassName("pp");
-                    for (x = 0; btnArray.length; x++) {
-                        btnArray[x].setAttribute( "onClick", "javascript: end();" );
-                    }
+                tieEnd();
             }
             
             if (computerWinH()) {
-                document.getElementById("win").innerHTML = "You lost!";
-                var btnArray = document.getElementsByClassName("pp");
-                for (x = 0; btnArray.length; x++) {
-                    btnArray[x].setAttribute( "onClick", "javascript: end();" );
-                }
+                loseEnd();
             }
             else if (computerWinV()) {
-                document.getElementById("win").innerHTML = "You lost!";
-                var btnArray = document.getElementsByClassName("pp");
-                for (x = 0; btnArray.length; x++) {
-                    btnArray[x].setAttribute( "onClick", "javascript: end();" );
-                }
+                loseEnd();
             }
             else if (computerWinD()) {
-                document.getElementById("win").innerHTML = "You lost!";
-                var btnArray = document.getElementsByClassName("pp");
-                for (x = 0; btnArray.length; x++) {
-                    btnArray[x].setAttribute( "onClick", "javascript: end();" );
-                }
+                loseEnd();
+            }
+            else if (computerDefenseH()) {
+                if (tie() == true) {tieEnd();}
+            }
+            else if (computerDefenseV()) {
+                if (tie() == true) {tieEnd();}
+            }
+            else if (computerDefenseD()) {
+                if (tie() == true) {tieEnd();}
             }
             else {
-                outerloop:
-                for (x = 1; x < 4; x++){
-                    for (y = 1; y < 4; y++) {
-                        var z = ""; z+= x; z+= y;
-                        if (document.getElementById(z).innerHTML == "_") {
-                            document.getElementById(z).innerHTML = "O";
-                            break outerloop;
+                if (document.getElementById(22).innerHTML == "_") {
+                    document.getElementById(22).innerHTML = "O";
+                    var played = true;
+                }
+                if (!played) {
+                    outerloop:
+                    for (x = 1; x < 4; x++){
+                        for (y = 1; y < 4; y++) {
+                            var z = ""; z+= x; z+= y;
+                            if (document.getElementById(z).innerHTML == "_") {
+                                document.getElementById(z).innerHTML = "O";
+                                break outerloop;
+                            }
                         }
                     }
                 }
             }
         }
     }
+    
+    function winEnd() {
+        document.getElementById("win").innerHTML = "You won!";
+        var btnArray = document.getElementsByClassName("pp");
+            for (x = 0; btnArray.length; x++) {
+                btnArray[x].setAttribute( "onClick", "javascript: end();" );
+            }
+    }
+    
+    function loseEnd() {
+        document.getElementById("win").innerHTML = "You lost!";
+        var btnArray = document.getElementsByClassName("pp");
+        for (x = 0; btnArray.length; x++) {
+            btnArray[x].setAttribute( "onClick", "javascript: end();" );
+        }
+    }
+    
+    function tieEnd() {
+        document.getElementById("win").innerHTML = "You tied!";
+        var btnArray = document.getElementsByClassName("pp");
+            for (x = 0; btnArray.length; x++) {
+                btnArray[x].setAttribute( "onClick", "javascript: end();" );
+            }
+    }
+    
     
     function end() {
         var h = true;
@@ -221,7 +241,6 @@
         }
         return false;
     }
-    
     function computerWinV() {
         for (y = 1; y < 4; y++) {
             var rowid = "";
@@ -247,7 +266,6 @@
         }
         return false;
     }
-    
     function computerWinD() {
         var rowid = "";
         for (x=1; x<4; x++) {
@@ -295,9 +313,107 @@
             return false;
         }
     }
+    
+    function computerDefenseH() {
+        for (x = 1; x < 4; x++) {
+            var rowid = "";
+            for (y = 1; y < 4; y++) {
+                var z = ""; z+= x; z+= y;
+                rowid += document.getElementById(z).innerHTML;
+            }
+            if (rowid == "XX_"){
+                var z = ""; z+= x; z+= 3;
+                document.getElementById(z).innerHTML = "O";   
+                return true;
+                } 
+            else if (rowid == "X_X"){
+                var z = ""; z+= x; z+= 2;
+                document.getElementById(z).innerHTML = "O";   
+                return true;
+                }
+            else if (rowid == "_XX"){
+                var z = ""; z+= x; z+= 1;
+                document.getElementById(z).innerHTML = "O";   
+                return true;
+                }
+        }
+        return false;
+    }
+    function computerDefenseV() {
+        for (y = 1; y < 4; y++) {
+            var rowid = "";
+            for (x = 1; x < 4; x++) {
+                var z = ""; z+= x; z+= y;
+                rowid += document.getElementById(z).innerHTML;
+            }
+            if (rowid == "XX_"){
+                var z = ""; z+= 3; z+= y;
+                document.getElementById(z).innerHTML = "O";   
+                return true;
+                } 
+            else if (rowid == "X_X"){
+                var z = ""; z+= 2; z+= y;
+                document.getElementById(z).innerHTML = "O";   
+                return true;
+                }
+            else if (rowid == "_XX"){
+                var z = ""; z+= 1; z+= y;
+                document.getElementById(z).innerHTML = "O";   
+                return true;
+                } 
+        }
+        return false;
+    }
+    function computerDefenseD() {
+        var rowid = "";
+        for (x=1; x<4; x++) {
+            var z = ""; z+=x; z+=x;
+            rowid += document.getElementById(z).innerHTML;  
+        }
+        if (rowid == "XX_"){
+            var z = "33";
+            document.getElementById(z).innerHTML = "O";   
+            return true;
+            } 
+        else if (rowid == "X_X"){
+            var z = "22"; 
+            document.getElementById(z).innerHTML = "O";   
+            return true;
+            }
+        else if (rowid == "_XX"){
+            var z = "11";
+            document.getElementById(z).innerHTML = "O";   
+            return true;
+            } 
+        
+        rowid = "";
+        for (x=1; x<4; x++) { 
+            var z = ""; z+= x; z+=(4-x);
+            rowid += document.getElementById(z).innerHTML; 
+        }
+        
+        if (rowid == "XX_"){
+            var z = "31";
+            document.getElementById(z).innerHTML = "O";   
+            return true;
+            } 
+        else if (rowid == "X_X"){
+            var z = "22";
+            document.getElementById(z).innerHTML = "O";   
+            return true;
+            }
+        else if (rowid == "_XX"){
+            var z = "13";
+            document.getElementById(z).innerHTML = "O";   
+            return true;
+            }
+        else {
+            return false;
+        }
+    }
+    
     </script>
 </body>
 </html>
-
 
 
