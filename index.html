@@ -136,6 +136,11 @@
             var elidd = btnArray[x].getAttribute('id');
             btnArray[x].setAttribute( "onClick", "javascript: myFunction(this.id);" );
         }
+        var goesFirst = Math.random();
+        if (goesFirst < 0.5) {
+            alert("Computer will go first!");
+            myFunction();
+        }
     }
     
     function myFunction(idd) {
@@ -169,6 +174,22 @@
             else {
                 if (document.getElementById(22).innerHTML == "_") {
                     document.getElementById(22).innerHTML = "O";
+                    var played = true;
+                }
+                if (!played && document.getElementById(13).innerHTML == "_") {
+                    document.getElementById(13).innerHTML = "O";
+                    var played = true;
+                }
+                if (!played && document.getElementById(31).innerHTML == "_") {
+                    document.getElementById(31).innerHTML = "O";
+                    var played = true;
+                }
+                if (!played && document.getElementById(33).innerHTML == "_") {
+                    document.getElementById(33).innerHTML = "O";
+                    var played = true;
+                }
+                if (!played && document.getElementById(11).innerHTML == "_") {
+                    document.getElementById(11).innerHTML = "O";
                     var played = true;
                 }
                 if (!played) {
@@ -415,5 +436,3 @@
     </script>
 </body>
 </html>
-
-
