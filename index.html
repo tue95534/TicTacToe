@@ -113,12 +113,16 @@
             <button id="again" onclick="restart()" class="optionsbtn">PLAY AGAIN</button>
             <div class="scorebox"> 
                 <p>Score</p> <br>
-                <div class="score">0-0-0</div>
+                <div id="score" class="score">0-0-0</div>
             </div>
-            <button id="clear" onclick="restart()" class="optionsbtn">CLEAR SCORE</button>
+            <button id="clear" onclick="clear()" class="optionsbtn">CLEAR SCORE</button>
     </div>
 
     <script>
+    var wins = 0;
+    var losses = 0;
+    var ties = 0;
+    
     function gameCheck() {
         for (x = 1; x < 4; x++) {
             var rowid = "";
@@ -190,24 +194,28 @@
                 btnArray[x].setAttribute( "onClick", "javascript: myFunction(this.id);" );
             }
         }
-        // var goesFirst = Math.random();
-        // if (goesFirst < 0.5) {
-        //     alert("Computer will go first!");
-        //     computerTurn();
-        // }
-        computerTurn();
+        var goesFirst = Math.random();
+        if (goesFirst < 0.5) {
+            alert("Computer will go first!");
+            computerTurn();
+        }
+        else {
+            alert("You go first!");
+        }
     }
     
     function myFunction(idd) {
         if (document.getElementById(idd).innerHTML == "_"){
             document.getElementById(idd).innerHTML = "X";
             if (gameCheck() == true) {
+                wins++;
                 winEnd();
             }
             else if (tie() == true) {
+                ties++;
                 tieEnd();
             }
-            if (!gameCheck()) {
+            if (!gameCheck() && !tie()) {
                 computerTurn(); 
             }
         }
@@ -215,22 +223,25 @@
     
     function computerTurn() {
         if (computerWinH()) {
+            losses++;
             loseEnd();
         }
         else if (computerWinV()) {
+            losses++;
             loseEnd();
         }
         else if (computerWinD()) {
+            losses++;
             loseEnd();
         }
         else if (computerDefenseH()) {
-            if (tie() == true) {tieEnd();}
+            if (tie() == true) {ties++; tieEnd();}
         }
         else if (computerDefenseV()) {
-            if (tie() == true) {tieEnd();}
+            if (tie() == true) {ties++; tieEnd();}
         }
         else if (computerDefenseD()) {
-            if (tie() == true) {tieEnd();}
+            if (tie() == true) {ties++; tieEnd();}
         }
         else {
             if (document.getElementById(22).innerHTML == "_") {
@@ -267,6 +278,7 @@
             }
         }
         if (tie() == true) {
+            ties++; 
             tieEnd();
         }
     }
@@ -274,9 +286,11 @@
     function winEnd() {
         document.getElementById("win").innerHTML = "You won!";
         var btnArray = document.getElementsByClassName("pp");
-            for (x = 0; x < btnArray.length; x++) {
-                btnArray[x].setAttribute( "onClick", "javascript: end();" );
-            }
+        for (x = 0; x < btnArray.length; x++) {
+            btnArray[x].setAttribute( "onClick", "javascript: end();" );
+        }
+        theScore = wins + "-" + losses + "-" + ties;
+        document.getElementById("score").innerHTML = theScore;
     }
     
     function loseEnd() {
@@ -285,14 +299,18 @@
         for (x = 0; x < btnArray.length; x++) {
             btnArray[x].setAttribute( "onClick", "javascript: end();" );
         }
+        theScore = wins + "-" + losses + "-" + ties;
+        document.getElementById("score").innerHTML = theScore;
     }
     
     function tieEnd() {
         document.getElementById("win").innerHTML = "You tied!";
         var btnArray = document.getElementsByClassName("pp");
-            for (x = 0; x < btnArray.length; x++) {
-                btnArray[x].setAttribute( "onClick", "javascript: end();" );
-            }
+        for (x = 0; x < btnArray.length; x++) {
+            btnArray[x].setAttribute( "onClick", "javascript: end();" );
+        }
+        theScore = wins + "-" + losses + "-" + ties;
+        document.getElementById("score").innerHTML = theScore;
     }
     
     
@@ -494,6 +512,15 @@
         else {
             return false;
         }
+    }
+    
+    function clear() {
+        wins = 0;
+        losses = 0;
+        ties = 0;
+        theScore = wins + "-" + losses + "-" + ties;
+        document.getElementById("score").innerHTML = theScore;
+        console.log("ran");
     }
     
     </script>
