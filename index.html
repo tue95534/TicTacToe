@@ -133,14 +133,17 @@
         document.getElementById("win").innerHTML = "";
         var btnArray = document.getElementsByClassName("pp");
         for (x = 0; btnArray.length; x++) {
-            var elidd = btnArray[x].getAttribute('id');
-            btnArray[x].setAttribute( "onClick", "javascript: myFunction(this.id);" );
+            if (btnArray[x] !== undefined) {
+                var elidd = btnArray[x].getAttribute('id');
+                btnArray[x].setAttribute( "onClick", "javascript: myFunction(this.id);" );
+            }
         }
-        var goesFirst = Math.random();
-        if (goesFirst < 0.5) {
-            alert("Computer will go first!");
-            myFunction();
-        }
+        // var goesFirst = Math.random();
+        // if (goesFirst < 0.5) {
+        //     alert("Computer will go first!");
+        //     computerTurn();
+        // }
+        computerTurn();
     }
     
     function myFunction(idd) {
@@ -152,55 +155,58 @@
             else if (tie() == true) {
                 tieEnd();
             }
-            
-            if (computerWinH()) {
-                loseEnd();
+            computerTurn(); 
+        }
+    }
+    
+    function computerTurn() {
+        if (computerWinH()) {
+            loseEnd();
+        }
+        else if (computerWinV()) {
+            loseEnd();
+        }
+        else if (computerWinD()) {
+            loseEnd();
+        }
+        else if (computerDefenseH()) {
+            if (tie() == true) {tieEnd();}
+        }
+        else if (computerDefenseV()) {
+            if (tie() == true) {tieEnd();}
+        }
+        else if (computerDefenseD()) {
+            if (tie() == true) {tieEnd();}
+        }
+        else {
+            if (document.getElementById(22).innerHTML == "_") {
+                document.getElementById(22).innerHTML = "O";
+                var played = true;
             }
-            else if (computerWinV()) {
-                loseEnd();
+            if (!played && document.getElementById(13).innerHTML == "_") {
+                document.getElementById(13).innerHTML = "O";
+                var played = true;
             }
-            else if (computerWinD()) {
-                loseEnd();
+            if (!played && document.getElementById(31).innerHTML == "_") {
+                document.getElementById(31).innerHTML = "O";
+                var played = true;
             }
-            else if (computerDefenseH()) {
-                if (tie() == true) {tieEnd();}
+            if (!played && document.getElementById(33).innerHTML == "_") {
+                document.getElementById(33).innerHTML = "O";
+                var played = true;
             }
-            else if (computerDefenseV()) {
-                if (tie() == true) {tieEnd();}
+            if (!played && document.getElementById(11).innerHTML == "_") {
+                document.getElementById(11).innerHTML = "O";
+                var played = true;
             }
-            else if (computerDefenseD()) {
-                if (tie() == true) {tieEnd();}
-            }
-            else {
-                if (document.getElementById(22).innerHTML == "_") {
-                    document.getElementById(22).innerHTML = "O";
-                    var played = true;
-                }
-                if (!played && document.getElementById(13).innerHTML == "_") {
-                    document.getElementById(13).innerHTML = "O";
-                    var played = true;
-                }
-                if (!played && document.getElementById(31).innerHTML == "_") {
-                    document.getElementById(31).innerHTML = "O";
-                    var played = true;
-                }
-                if (!played && document.getElementById(33).innerHTML == "_") {
-                    document.getElementById(33).innerHTML = "O";
-                    var played = true;
-                }
-                if (!played && document.getElementById(11).innerHTML == "_") {
-                    document.getElementById(11).innerHTML = "O";
-                    var played = true;
-                }
-                if (!played) {
-                    outerloop:
-                    for (x = 1; x < 4; x++){
-                        for (y = 1; y < 4; y++) {
-                            var z = ""; z+= x; z+= y;
-                            if (document.getElementById(z).innerHTML == "_") {
-                                document.getElementById(z).innerHTML = "O";
-                                break outerloop;
-                            }
+            if (!played) {
+                outerloop:
+                for (x = 1; x < 4; x++){
+                    for (y = 1; y < 4; y++) {
+                        var z = ""; z+= x; z+= y;
+                        if (document.getElementById(z).innerHTML == "_") {
+                            document.getElementById(z).innerHTML = "O";
+                            break outerloop;
                         }
                     }
                 }
