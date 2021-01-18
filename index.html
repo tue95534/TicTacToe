@@ -132,7 +132,7 @@
         }
         document.getElementById("win").innerHTML = "";
         var btnArray = document.getElementsByClassName("pp");
-        for (x = 0; btnArray.length - 1; x++) {
+        for (x = 0; x < btnArray.length - 1; x++) {
             if (btnArray[x] !== undefined) {
                 var elidd = btnArray[x].getAttribute('id');
                 btnArray[x].setAttribute( "onClick", "javascript: myFunction(this.id);" );
@@ -217,7 +217,7 @@
     function winEnd() {
         document.getElementById("win").innerHTML = "You won!";
         var btnArray = document.getElementsByClassName("pp");
-            for (x = 0; btnArray.length - 1; x++) {
+            for (x = 0; x < btnArray.length - 1; x++) {
                 btnArray[x].setAttribute( "onClick", "javascript: end();" );
             }
     }
@@ -225,7 +225,7 @@
     function loseEnd() {
         document.getElementById("win").innerHTML = "You lost!";
         var btnArray = document.getElementsByClassName("pp");
-        for (x = 0; btnArray.length - 1; x++) {
+        for (x = 0; x < btnArray.length - 1; x++) {
             btnArray[x].setAttribute( "onClick", "javascript: end();" );
         }
     }
@@ -233,7 +233,7 @@
     function tieEnd() {
         document.getElementById("win").innerHTML = "You tied!";
         var btnArray = document.getElementsByClassName("pp");
-            for (x = 0; btnArray.length - 1; x++) {
+            for (x = 0; x < btnArray.length - 1; x++) {
                 btnArray[x].setAttribute( "onClick", "javascript: end();" );
             }
     }
