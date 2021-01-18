@@ -132,7 +132,7 @@
         }
         document.getElementById("win").innerHTML = "";
         var btnArray = document.getElementsByClassName("pp");
-        for (x = 0; btnArray.length; x++) {
+        for (x = 0; btnArray.length - 1; x++) {
             if (btnArray[x] !== undefined) {
                 var elidd = btnArray[x].getAttribute('id');
                 btnArray[x].setAttribute( "onClick", "javascript: myFunction(this.id);" );
