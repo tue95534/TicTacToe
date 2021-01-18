@@ -155,7 +155,9 @@
             else if (tie() == true) {
                 tieEnd();
             }
-            computerTurn(); 
+            if (!gameCheck()) {
+                computerTurn(); 
+            }
         }
     }
     
