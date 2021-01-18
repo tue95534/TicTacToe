@@ -115,7 +115,7 @@
                 <p>Score</p> <br>
                 <div id="score" class="score">0-0-0</div>
             </div>
-            <button id="clear" onclick="clear()" class="optionsbtn">CLEAR SCORE</button>
+            <button id="clear" onclick="clearScore()" class="optionsbtn">CLEAR SCORE</button>
     </div>
 
     <script>
@@ -514,18 +514,12 @@
         }
     }
     
-    function clear() {
-        console.log("ran");
+    function clearScore() {
         wins = 0;
-        console.log("ran");
         losses = 0;
-        console.log("ran");
         ties = 0;
-        console.log("ran");
         theScore = wins + "-" + losses + "-" + ties;
-        console.log("ran");
         document.getElementById("score").innerHTML = theScore;
-        console.log("ran");
     }
     
     </script>
