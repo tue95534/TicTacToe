@@ -28,7 +28,6 @@
 
 .board {
     max-width: max-content; margin-left: auto; margin-right: auto;
-    border: 2px solid;
 }
 
 body {
