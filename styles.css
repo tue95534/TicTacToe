@@ -1,7 +1,13 @@
 .pp {
     display: inline-flex; height: 100px; width: 100px; border: 2px solid; background-color: gray; vertical-align: middle;
     top:0px; text-align: center; justify-content: center; justify-items: center; align-items: center; margin: 10px;
-    font-size: 75px; box-shadow: 10px 5px 5px red; font-family: Arial, Helvetica, sans-serif;
+    font-size: 75px;
+    border-radius: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.pp:hover {
+    border-color: white;
 }
 
 .optionsbtn {
@@ -10,11 +16,8 @@
     border: 2px solid;
     border-radius: 15px;
     position: relative;
-    /*margin: auto;*/
-    /*margin-left: 145px;*/
     background-image: linear-gradient(red, yellow);
     margin: 10px;
-    /*display: block;*/
     box-shadow: 5px 10px 18px red;
 }
 
@@ -25,6 +28,7 @@
 
 .board {
     max-width: max-content; margin-left: auto; margin-right: auto;
+    border: 2px solid;
 }
 
 body {
@@ -84,4 +88,27 @@ p {
     color: white;
     text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
     font-size: 35px;
+}
+
+#alertbox {
+    position: absolute;
+    height: max-content;
+    width: 100%;
+    top: 250px;
+    /* border: 2px solid; */
+    display: none;
+}
+
+.theAlert {
+    height: max-content;
+    align-items: center;
+    width: max-content;
+    border: 2px solid;
+    text-align: center;
+    margin: auto;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: red;
+    text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
+    color: white;
 }

@@ -2,165 +2,176 @@ var wins = 0;
 var losses = 0;
 var ties = 0;
 
+
 function gameCheck() {
-  for (x = 1; x < 4; x++) {
-      var rowid = "";
-      for (y = 1; y < 4; y++) {
-          var z = ""; z+= x; z+= y;
-          rowid += document.getElementById(z).innerHTML;
-      }
-      if (rowid == "XXX" || rowid == "OOO"){
-              return true;
-          } 
-  }
+    for (x = 1; x < 4; x++) {
+        var rowid = "";
+        for (y = 1; y < 4; y++) {
+            var z = ""; z+= x; z+= y;
+            rowid += document.getElementById(z).innerHTML;
+        }
+        if (rowid == "XXX" || rowid == "OOO"){
+                return true;
+            } 
+    }
 
-  for (y = 1; y < 4; y++) {
-      var rowid = "";
-      for (x = 1; x < 4; x++) {
-          var z = ""; z+= x; z+= y;
-          rowid += document.getElementById(z).innerHTML;
-      }
-      if (rowid == "XXX" || rowid == "OOO"){
-              return true;
-          } 
-  }
+    for (y = 1; y < 4; y++) {
+        var rowid = "";
+        for (x = 1; x < 4; x++) {
+            var z = ""; z+= x; z+= y;
+            rowid += document.getElementById(z).innerHTML;
+        }
+        if (rowid == "XXX" || rowid == "OOO"){
+                return true;
+            } 
+    }
 
-  rowid = "";
-  for (x = 1; x < 4; x++) {
-      var z = ""; z+= x; z+= 4-x;
-      rowid += document.getElementById(z).innerHTML;
-  }
-  if (rowid == "XXX" || rowid == "OOO"){
-          return true;
-  } 
+    rowid = "";
+    for (x = 1; x < 4; x++) {
+        var z = ""; z+= x; z+= 4-x;
+        rowid += document.getElementById(z).innerHTML;
+    }
+    if (rowid == "XXX" || rowid == "OOO"){
+            return true;
+    } 
 
-  rowid = "";
-  for (x = 1; x < 4; x++) {
-      var z = ""; z+= x; z+= x;
-      rowid += document.getElementById(z).innerHTML;
-  }
-  if (rowid == "XXX" || rowid == "OOO"){
-          return true;
-  }
+    rowid = "";
+    for (x = 1; x < 4; x++) {
+        var z = ""; z+= x; z+= x;
+        rowid += document.getElementById(z).innerHTML;
+    }
+    if (rowid == "XXX" || rowid == "OOO"){
+            return true;
+    }
 
-  return false;
-}
+    return false;
+    }
 
 function tie() {
-  var boardid = "";
-  for (x = 1; x < 4; x++) {
-      for (y = 1; y < 4; y++) {
-          var z = ""; z+= x; z+= y;
-          boardid += document.getElementById(z).innerHTML;
-      }
-  }
-  if (boardid.includes("_")) {false;}
-  else {return true;}
-}
+    var boardid = "";
+    for (x = 1; x < 4; x++) {
+        for (y = 1; y < 4; y++) {
+            var z = ""; z+= x; z+= y;
+            boardid += document.getElementById(z).innerHTML;
+        }
+    }
+    if (boardid.includes("_")) {false;}
+    else {return true;}
+    }
 
 function restart() {
-  for (x = 1; x < 4; x++){
-      for (y = 1; y < 4; y++) {
-          var z = ""; z+= x; z+= y;
-          document.getElementById(z).innerHTML = "_";
-      }
-  }
-  document.getElementById("win").innerHTML = "";
-  var btnArray = document.getElementsByClassName("pp");
-  for (x = 0; x < btnArray.length; x++) {
-      if (btnArray[x] !== undefined) {
-          var elidd = btnArray[x].getAttribute('id');
-          btnArray[x].setAttribute( "onClick", "javascript: myFunction(this.id);" );
-      }
-  }
-  var goesFirst = Math.random();
-  if (goesFirst < 0.5) {
-      alert("Computer will go first!");
-      computerTurn();
-  }
-  else {
-      alert("You go first!");
-  }
-}
+    for (x = 1; x < 4; x++){
+        for (y = 1; y < 4; y++) {
+            var z = ""; z+= x; z+= y;
+            document.getElementById(z).innerHTML = "_";
+        }
+    }
+    document.getElementById("win").innerHTML = "";
+    var btnArray = document.getElementsByClassName("pp");
+    for (x = 0; x < btnArray.length; x++) {
+        if (btnArray[x] !== undefined) {
+            var elidd = btnArray[x].getAttribute('id');
+            btnArray[x].setAttribute( "onClick", "javascript: myFunction(this.id);" );
+        }
+    }
+    var goesFirst = Math.random();
+    if (goesFirst < 0.5) {
+        document.getElementById("theAlert").innerHTML = "COMPUTER WILL GO FIRST!";
+        document.getElementById("alertbox").style.display = 'block';
+    
+        setTimeout(function() { 
+            document.getElementById("alertbox").style.display = 'none';
+        }, 1000);
+        computerTurn();
+    }
+    else {
+        document.getElementById("theAlert").innerHTML = "YOU GO FIRST!";
+        document.getElementById("alertbox").style.display = 'block';
+    
+        setTimeout(function() { 
+            document.getElementById("alertbox").style.display = 'none';
+        }, 1000);
+    }
+    }
 
 function myFunction(idd) {
-  if (document.getElementById(idd).innerHTML == "_"){
-      document.getElementById(idd).innerHTML = "X";
-      if (gameCheck() == true) {
-          wins++;
-          winEnd();
-      }
-      else if (tie() == true) {
-          ties++;
-          tieEnd();
-      }
-      if (!gameCheck() && !tie()) {
-          computerTurn(); 
-      }
-  }
-}
+    if (document.getElementById(idd).innerHTML == "_"){
+        document.getElementById(idd).innerHTML = "X";
+        if (gameCheck() == true) {
+            wins++;
+            winEnd();
+        }
+        else if (tie() == true) {
+            ties++;
+            tieEnd();
+        }
+        if (!gameCheck() && !tie()) {
+            computerTurn(); 
+        }
+    }
+    }
 
 function computerTurn() {
-  if (computerWinH()) {
-      losses++;
-      loseEnd();
-  }
-  else if (computerWinV()) {
-      losses++;
-      loseEnd();
-  }
-  else if (computerWinD()) {
-      losses++;
-      loseEnd();
-  }
-  else if (computerDefenseH()) {
-      if (tie() == true) {ties++; tieEnd();}
-  }
-  else if (computerDefenseV()) {
-      if (tie() == true) {ties++; tieEnd();}
-  }
-  else if (computerDefenseD()) {
-      if (tie() == true) {ties++; tieEnd();}
-  }
-  else {
-      if (document.getElementById(22).innerHTML == "_") {
-          document.getElementById(22).innerHTML = "O";
-          var played = true;
-      }
-      if (!played && document.getElementById(13).innerHTML == "_") {
-          document.getElementById(13).innerHTML = "O";
-          var played = true;
-      }
-      if (!played && document.getElementById(31).innerHTML == "_") {
-          document.getElementById(31).innerHTML = "O";
-          var played = true;
-      }
-      if (!played && document.getElementById(33).innerHTML == "_") {
-          document.getElementById(33).innerHTML = "O";
-          var played = true;
-      }
-      if (!played && document.getElementById(11).innerHTML == "_") {
-          document.getElementById(11).innerHTML = "O";
-          var played = true;
-      }
-      if (!played) {
-          outerloop:
-          for (x = 1; x < 4; x++){
-              for (y = 1; y < 4; y++) {
-                  var z = ""; z+= x; z+= y;
-                  if (document.getElementById(z).innerHTML == "_") {
-                      document.getElementById(z).innerHTML = "O";
-                      break outerloop;
-                  }
-              }
-          }
-      }
-  }
-  if (tie() == true) {
-      ties++; 
-      tieEnd();
-  }
-}
+    if (computerWinH()) {
+        losses++;
+        loseEnd();
+    }
+    else if (computerWinV()) {
+        losses++;
+        loseEnd();
+    }
+    else if (computerWinD()) {
+        losses++;
+        loseEnd();
+    }
+    else if (computerDefenseH()) {
+        if (tie() == true) {ties++; tieEnd();}
+    }
+    else if (computerDefenseV()) {
+        if (tie() == true) {ties++; tieEnd();}
+    }
+    else if (computerDefenseD()) {
+        if (tie() == true) {ties++; tieEnd();}
+    }
+    else {
+        if (document.getElementById(22).innerHTML == "_") {
+            document.getElementById(22).innerHTML = "O";
+            var played = true;
+        }
+        if (!played && document.getElementById(13).innerHTML == "_") {
+            document.getElementById(13).innerHTML = "O";
+            var played = true;
+        }
+        if (!played && document.getElementById(31).innerHTML == "_") {
+            document.getElementById(31).innerHTML = "O";
+            var played = true;
+        }
+        if (!played && document.getElementById(33).innerHTML == "_") {
+            document.getElementById(33).innerHTML = "O";
+            var played = true;
+        }
+        if (!played && document.getElementById(11).innerHTML == "_") {
+            document.getElementById(11).innerHTML = "O";
+            var played = true;
+        }
+        if (!played) {
+            outerloop:
+            for (x = 1; x < 4; x++){
+                for (y = 1; y < 4; y++) {
+                    var z = ""; z+= x; z+= y;
+                    if (document.getElementById(z).innerHTML == "_") {
+                        document.getElementById(z).innerHTML = "O";
+                        break outerloop;
+                    }
+                }
+            }
+        }
+    }
+    if (tie() == true) {
+        ties++; 
+        tieEnd();
+    }
+    }
 
 function winEnd() {
   document.getElementById("win").innerHTML = "You won!";
@@ -394,12 +405,9 @@ function computerDefenseD() {
 }
 
 function clearf() {
-  console.log("ran");
   wins = 0;
-  console.log("ran");
   losses = 0;
   ties = 0;
   theScore = wins + "-" + losses + "-" + ties;
   document.getElementById("score").innerHTML = theScore;
-  console.log("ran");
 }
