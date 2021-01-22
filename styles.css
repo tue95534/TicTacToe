@@ -132,5 +132,13 @@ p {
     justify-content: space-between;
     color: red;
     width: 250px;
-/*     border: 2px solid; */
+}
+
+.slidertitle {
+    padding-bottom: 5px;
+    color: white;
+}
+
+h1 {
+    color: white;
 }
