@@ -11,6 +11,19 @@
         <h1>Tic-Tac-Toe!</h1>
     </header>
     
+    <div class="slidecontainer">
+        <div class="slidertitle">DIFFICULTY LEVEL</div>
+        <br>
+        <input type="range" min="1" max="3" value="2" class="slider" id="slider">
+
+        <br>
+
+        <center><div class="sliderlabels">
+            <pslider>EASY</pslider> <pslider>MEDIUM</pslider> <pslider>HARD</pslider>
+        </div></center>
+    </div>
+    <br>
+    
     <div class="board">
         <button id="11" onclick="myFunction(this.id)" class="pp">_</button> <button id="12" onclick="myFunction(this.id)" class="pp">_</button> <button id="13" onclick="myFunction(this.id)" class="pp">_</button> <br>
         <button id="21" onclick="myFunction(this.id)" class="pp">_</button> <button id="22" onclick="myFunction(this.id)" class="pp">_</button> <button id="23" onclick="myFunction(this.id)" class="pp">_</button> <br>
@@ -33,19 +46,7 @@
         <div id="theAlert" class="theAlert">YOU GO FIRST!</div>
     </div>
 
-    <br>
 
-    <div class="slidecontainer">
-        <div class="slidertitle">DIFFICULTY LEVEL</div>
-        <br>
-        <input type="range" min="1" max="3" value="2" class="slider" id="slider">
-
-        <br>
-
-        <center><div class="sliderlabels">
-            <pslider>EASY</pslider> <pslider>MEDIUM</pslider> <pslider>HARD</pslider>
-        </div></center>
-    </div>
 
     <script src="TTTgame.js"></script> 
 </body>
