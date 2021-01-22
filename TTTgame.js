@@ -204,22 +204,27 @@ function computerTurn() {
         if (document.getElementById(22).innerHTML == "_") {
             document.getElementById(22).innerHTML = "O";
             var played = true;
+            computerEnd();
         }
         else if (document.getElementById(13).innerHTML == "_") {
             document.getElementById(13).innerHTML = "O";
             played = true;
+            computerEnd();
         }
         else if (document.getElementById(31).innerHTML == "_") {
             document.getElementById(31).innerHTML = "O";
             played = true;
+            computerEnd();
         }
         else if (document.getElementById(33).innerHTML == "_") {
             document.getElementById(33).innerHTML = "O";
             played = true;
+            computerEnd();
         }
         else if (document.getElementById(11).innerHTML == "_") {
             document.getElementById(11).innerHTML = "O";
             played = true;
+            computerEnd();
         }
     }
 
@@ -230,24 +235,23 @@ function computerTurn() {
                 var z = ""; z+= x; z+= y;
                 if (document.getElementById(z).innerHTML == "_") {
                     document.getElementById(z).innerHTML = "O";
+                    computerEnd();
                     break outerloop;
                 }
             }
         }
     }
+}
 
-    if (tie() == true) {
-        ties++; 
-        tieEnd();
-    }
-    if (win() == true) {
-        wins++;
-        winEnd();
-    }
+function computerEnd() {
     if (lose() == true) {
         losses++;
         loseEnd();
-    } 
+    }
+    else if (tie() == true) {
+        ties++; 
+        tieEnd();
+    }
 }
 
 function winEnd() {
