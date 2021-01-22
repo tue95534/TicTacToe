@@ -36,7 +36,6 @@ body {
 }
 
 #win {
-
     width: 350px;
     margin-left: 8px;
     text-align: center;
@@ -55,7 +54,8 @@ header {
 .scorebox {
     height: 100px; width: 200px;
     border: 2px solid;
-    margin: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
     background-color: red;
     border-radius: 30px;
 }
@@ -110,4 +110,24 @@ p {
     background-color: red;
     text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
     color: white;
+}
+
+#slider {
+    width: 250px;
+    height: fit-content;
+    margin: auto;
+}
+
+.slidecontainer {
+    width: fit-content;
+    height: fit-content;
+    text-align: center;
+    margin: auto;
+}
+
+.sliderlabels {
+    display: flex;
+    justify-content: space-between;
+    color: red;
+    /* border: 2px solid; */
 }

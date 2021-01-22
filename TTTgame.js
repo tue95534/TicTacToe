@@ -3,14 +3,14 @@ var losses = 0;
 var ties = 0;
 
 
-function gameCheck() {
+function win() {
     for (x = 1; x < 4; x++) {
         var rowid = "";
         for (y = 1; y < 4; y++) {
             var z = ""; z+= x; z+= y;
             rowid += document.getElementById(z).innerHTML;
         }
-        if (rowid == "XXX" || rowid == "OOO"){
+        if (rowid == "XXX"){
                 return true;
             } 
     }
@@ -21,7 +21,7 @@ function gameCheck() {
             var z = ""; z+= x; z+= y;
             rowid += document.getElementById(z).innerHTML;
         }
-        if (rowid == "XXX" || rowid == "OOO"){
+        if (rowid == "XXX"){
                 return true;
             } 
     }
@@ -31,7 +31,7 @@ function gameCheck() {
         var z = ""; z+= x; z+= 4-x;
         rowid += document.getElementById(z).innerHTML;
     }
-    if (rowid == "XXX" || rowid == "OOO"){
+    if (rowid == "XXX"){
             return true;
     } 
 
@@ -40,12 +40,54 @@ function gameCheck() {
         var z = ""; z+= x; z+= x;
         rowid += document.getElementById(z).innerHTML;
     }
-    if (rowid == "XXX" || rowid == "OOO"){
+    if (rowid == "XXX"){
             return true;
     }
-
     return false;
+}
+
+function lose() {
+    for (x = 1; x < 4; x++) {
+        var rowid = "";
+        for (y = 1; y < 4; y++) {
+            var z = ""; z+= x; z+= y;
+            rowid += document.getElementById(z).innerHTML;
+        }
+        if (rowid == "OOO"){
+                return true;
+            } 
     }
+
+    for (y = 1; y < 4; y++) {
+        var rowid = "";
+        for (x = 1; x < 4; x++) {
+            var z = ""; z+= x; z+= y;
+            rowid += document.getElementById(z).innerHTML;
+        }
+        if (rowid == "OOO"){
+                return true;
+            } 
+    }
+
+    rowid = "";
+    for (x = 1; x < 4; x++) {
+        var z = ""; z+= x; z+= 4-x;
+        rowid += document.getElementById(z).innerHTML;
+    }
+    if (rowid == "OOO"){
+            return true;
+    } 
+
+    rowid = "";
+    for (x = 1; x < 4; x++) {
+        var z = ""; z+= x; z+= x;
+        rowid += document.getElementById(z).innerHTML;
+    }
+    if (rowid == "OOO"){
+            return true;
+    }
+    return false;
+}
 
 function tie() {
     var boardid = "";
@@ -97,7 +139,7 @@ function restart() {
 function myFunction(idd) {
     if (document.getElementById(idd).innerHTML == "_"){
         document.getElementById(idd).innerHTML = "X";
-        if (gameCheck() == true) {
+        if (win() == true) {
             wins++;
             winEnd();
         }
@@ -105,76 +147,111 @@ function myFunction(idd) {
             ties++;
             tieEnd();
         }
-        if (!gameCheck() && !tie()) {
+        if (!(win() || lose()) && !tie()) {
             computerTurn(); 
         }
     }
-    }
+}
 
 function computerTurn() {
-    if (computerWinH()) {
-        losses++;
-        loseEnd();
+    var slider = document.getElementById("slider");
+    console.log(slider.value);
+    var played = false;
+
+    if (slider.value == 3) {
+        if (computerWinH()) {
+            losses++;
+            loseEnd();
+            played = true;
+        }
+        else if (computerWinV()) {
+            losses++;
+            loseEnd();
+            played = true;
+        }
+        else if (computerWinD()) {
+            losses++;
+            loseEnd();
+            played = true;
+        }
     }
-    else if (computerWinV()) {
-        losses++;
-        loseEnd();
+
+    if (slider.value > 1 && !played) {
+        if (computerDefenseH()) {
+            if (tie() == true) {
+                ties++; 
+                tieEnd(); 
+            }
+            played = true;
+        }
+        else if (computerDefenseV()) {
+            if (tie() == true) {
+                ties++; 
+                tieEnd();
+            }
+            played = true;
+        }
+        else if (computerDefenseD()) {
+            if (tie() == true) {
+                ties++; 
+                tieEnd();
+            }
+            played = true;
+        }
     }
-    else if (computerWinD()) {
-        losses++;
-        loseEnd();
-    }
-    else if (computerDefenseH()) {
-        if (tie() == true) {ties++; tieEnd();}
-    }
-    else if (computerDefenseV()) {
-        if (tie() == true) {ties++; tieEnd();}
-    }
-    else if (computerDefenseD()) {
-        if (tie() == true) {ties++; tieEnd();}
-    }
-    else {
+
+    if (!played) {
         if (document.getElementById(22).innerHTML == "_") {
             document.getElementById(22).innerHTML = "O";
             var played = true;
         }
-        if (!played && document.getElementById(13).innerHTML == "_") {
+        else if (document.getElementById(13).innerHTML == "_") {
             document.getElementById(13).innerHTML = "O";
-            var played = true;
+            played = true;
         }
-        if (!played && document.getElementById(31).innerHTML == "_") {
+        else if (document.getElementById(31).innerHTML == "_") {
             document.getElementById(31).innerHTML = "O";
-            var played = true;
+            played = true;
         }
-        if (!played && document.getElementById(33).innerHTML == "_") {
+        else if (document.getElementById(33).innerHTML == "_") {
             document.getElementById(33).innerHTML = "O";
-            var played = true;
+            played = true;
         }
-        if (!played && document.getElementById(11).innerHTML == "_") {
+        else if (document.getElementById(11).innerHTML == "_") {
             document.getElementById(11).innerHTML = "O";
-            var played = true;
+            played = true;
         }
-        if (!played) {
-            outerloop:
-            for (x = 1; x < 4; x++){
-                for (y = 1; y < 4; y++) {
-                    var z = ""; z+= x; z+= y;
-                    if (document.getElementById(z).innerHTML == "_") {
-                        document.getElementById(z).innerHTML = "O";
-                        break outerloop;
-                    }
+    }
+
+    if (!played) {
+        outerloop:
+        for (x = 1; x < 4; x++){
+            for (y = 1; y < 4; y++) {
+                var z = ""; z+= x; z+= y;
+                if (document.getElementById(z).innerHTML == "_") {
+                    document.getElementById(z).innerHTML = "O";
+                    break outerloop;
                 }
             }
         }
     }
+
     if (tie() == true) {
         ties++; 
         tieEnd();
     }
+    if (win() == true) {
+        wins++;
+        winEnd();
     }
+    if (lose() == true) {
+        losses++;
+        loseEnd();
+    } 
+}
 
 function winEnd() {
-  document.getElementById("win").innerHTML = "You won!";
+  document.getElementById("win").innerHTML = "YOU WON!";
   var btnArray = document.getElementsByClassName("pp");
   for (x = 0; x < btnArray.length; x++) {
       btnArray[x].setAttribute( "onClick", "javascript: end();" );
@@ -184,7 +261,7 @@ function winEnd() {
 }
 
 function loseEnd() {
-  document.getElementById("win").innerHTML = "You lost!";
+  document.getElementById("win").innerHTML = "YOU LOST!";
   var btnArray = document.getElementsByClassName("pp");
   for (x = 0; x < btnArray.length; x++) {
       btnArray[x].setAttribute( "onClick", "javascript: end();" );
@@ -194,7 +271,7 @@ function loseEnd() {
 }
 
 function tieEnd() {
-  document.getElementById("win").innerHTML = "You tied!";
+  document.getElementById("win").innerHTML = "YOU TIED!";
   var btnArray = document.getElementsByClassName("pp");
   for (x = 0; x < btnArray.length; x++) {
       btnArray[x].setAttribute( "onClick", "javascript: end();" );
