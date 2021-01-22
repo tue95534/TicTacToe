@@ -131,6 +131,6 @@ p {
     display: flex;
     justify-content: space-between;
     color: red;
-    width: fit-content;
+    width: 250px;
     border: 2px solid;
 }
