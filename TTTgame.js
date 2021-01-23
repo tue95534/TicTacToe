@@ -148,7 +148,13 @@ function myFunction(idd) {
             tieEnd();
         }
         if (!(win() || lose()) && !tie()) {
-            computerTurn(); 
+            // var classlength = document.getElementsByClassName("pp").length;
+            // var boardlist = document.getElementsByClassName("pp");
+            var btnArray = document.getElementsByClassName("pp");
+            for (x = 0; x < btnArray.length; x++) {
+                btnArray[x].setAttribute( "onClick", "javascript: end();" );
+            }
+            setTimeout(computerTurn, 300);
         }
     }
 }
@@ -240,6 +246,10 @@ function computerTurn() {
                 }
             }
         }
+    }
+    var btnArray = document.getElementsByClassName("pp");
+    for (x = 0; x < btnArray.length; x++) {
+        btnArray[x].setAttribute( "onClick", "javascript: myFunction(this.id);" );
     }
 }
 
