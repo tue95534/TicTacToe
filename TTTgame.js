@@ -153,6 +153,7 @@ function myFunction(idd) {
             var btnArray = document.getElementsByClassName("pp");
             for (x = 0; x < btnArray.length; x++) {
                 btnArray[x].setAttribute( "onClick", "javascript: end();" );
+                console.log(btnArray[x].getAttribute("onclick"));
             }
             setTimeout(computerTurn, 300);
         }
@@ -204,13 +205,6 @@ function computerTurn() {
             }
             played = true;
         }
-//         else if (computerSpecialD()) {
-//             if (tie() == true) {
-//                 ties++; 
-//                 tieEnd();
-//             }
-//             played = true;
-//         }
     }
 
     if (!played) {
@@ -502,23 +496,6 @@ function computerDefenseD() {
   }
 }
 
-// function computerSpecialD() {
-//     var rowid = "";
-//     rowid += document.getElementById("13").innerHTML;
-//     rowid += document.getElementById("31").innerHTML;
-//     var spot11 = document.getElementById("11").innerHTML;
-//     var spot12 = document.getElementById("12").innerHTML;
-//     var spot21 = document.getElementById("21").innerHTML;
-//     if (rowid.equals("XX") && spot11.equals("_") && spot12.equals("_") && spot21.equals("_")) {
-//         document.getElementById("12").innerHTML = "O";
-//         console.log("worked");
-//         return true;
-//         }
-//     else {
-//         console.log("nope");
-//         return false;
-// }
-
 function clearf() {
   wins = 0;
   losses = 0;
@@ -526,3 +503,4 @@ function clearf() {
   theScore = wins + "-" + losses + "-" + ties;
   document.getElementById("score").innerHTML = theScore;
 }
+
