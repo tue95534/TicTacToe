@@ -157,6 +157,7 @@ function myFunction(idd) {
             }
             setTimeout(computerTurn, 300);
         }
+
     }
 }
 
@@ -185,24 +186,15 @@ function computerTurn() {
 
     if (slider.value > 1 && !played) {
         if (computerDefenseH()) {
-            if (tie() == true) {
-                ties++; 
-                tieEnd(); 
-            }
+            computerEnd();
             played = true;
         }
         else if (computerDefenseV()) {
-            if (tie() == true) {
-                ties++; 
-                tieEnd();
-            }
+            computerEnd();
             played = true;
         }
         else if (computerDefenseD()) {
-            if (tie() == true) {
-                ties++; 
-                tieEnd();
-            }
+            computerEnd();
             played = true;
         }
     }
@@ -258,6 +250,10 @@ function computerEnd() {
     if (lose() == true) {
         losses++;
         loseEnd();
+    }
+    else if (win() == true) {
+        wins++;
+        winEnd();
     }
     else if (tie() == true) {
         ties++; 
@@ -503,4 +499,3 @@ function clearf() {
   theScore = wins + "-" + losses + "-" + ties;
   document.getElementById("score").innerHTML = theScore;
 }
-
