@@ -204,13 +204,13 @@ function computerTurn() {
             }
             played = true;
         }
-        else if (computerSpecialD()) {
-            if (tie() == true) {
-                ties++; 
-                tieEnd();
-            }
-            played = true;
-        }
+//         else if (computerSpecialD()) {
+//             if (tie() == true) {
+//                 ties++; 
+//                 tieEnd();
+//             }
+//             played = true;
+//         }
     }
 
     if (!played) {
@@ -502,22 +502,22 @@ function computerDefenseD() {
   }
 }
 
-function computerSpecialD() {
-    var rowid = "";
-    rowid += document.getElementById("13").innerHTML;
-    rowid += document.getElementById("31").innerHTML;
-    var spot11 = document.getElementById("11").innerHTML;
-    var spot12 = document.getElementById("12").innerHTML;
-    var spot21 = document.getElementById("21").innerHTML;
-    if (rowid.equals("XX") && spot11.equals("_") && spot12.equals("_") && spot21.equals("_")) {
-        document.getElementById("12").innerHTML = "O";
-        console.log("worked");
-        return true;
-        }
-    else {
-        console.log("nope");
-        return false;
-}
+// function computerSpecialD() {
+//     var rowid = "";
+//     rowid += document.getElementById("13").innerHTML;
+//     rowid += document.getElementById("31").innerHTML;
+//     var spot11 = document.getElementById("11").innerHTML;
+//     var spot12 = document.getElementById("12").innerHTML;
+//     var spot21 = document.getElementById("21").innerHTML;
+//     if (rowid.equals("XX") && spot11.equals("_") && spot12.equals("_") && spot21.equals("_")) {
+//         document.getElementById("12").innerHTML = "O";
+//         console.log("worked");
+//         return true;
+//         }
+//     else {
+//         console.log("nope");
+//         return false;
+// }
 
 function clearf() {
   wins = 0;
