@@ -197,6 +197,10 @@ function computerTurn() {
             computerEnd();
             played = true;
         }
+        else if (specialMoves()) {
+            computerEnd();
+            played = true;
+        }
     }
 
     if (!played) {
@@ -490,6 +494,37 @@ function computerDefenseD() {
   else {
       return false;
   }
+}
+
+function specialMoves() {
+    var letter11 = document.getElementById("11").innerHTML;
+    var letter12 = document.getElementById("12").innerHTML;
+    var letter13 = document.getElementById("13").innerHTML;
+    var letter21 = document.getElementById("21").innerHTML;
+    var letter31 = document.getElementById("31").innerHTML;
+    var letter32 = document.getElementById("32").innerHTML;
+    var letter33 = document.getElementById("33").innerHTML;
+
+    if (letter13 == "X" && letter31 == "X") {
+        if (letter11 == "_" && letter12 == "_" && letter21 == "_") {
+            document.getElementById("12").innerHTML = "O";
+            return true;
+        }
+    }
+
+    if (letter11 == "X" && letter33 == "X") {
+        if (letter21 == "_" && letter31 == "_" && letter32 == "_") {
+            document.getElementById("32").innerHTML = "O";
+            return true;
+        }
+    }
+
+    if (letter21 == "X" && letter33 == "X") {
+        if (letter21 == "_" && letter31 == "_" && letter32 == "_") {
+            document.getElementById("32").innerHTML = "O";
+            return true;
+        }
+    }
 }
 
 function clearf() {
